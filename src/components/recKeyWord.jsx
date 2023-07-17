@@ -5,9 +5,13 @@ function RecKeyWord({ res }) {
 		<div>
 			<p>추천검색어</p>
 
-			{res.map(function (a, i) {
-				return <div key={i}>{a.sickNm}</div>;
-			})}
+			{res.length === 0 ? (
+				<div>검색어 없음</div>
+			) : (
+				res.map(function (a, i) {
+					return <div key={i}>{a.sickNm}</div>;
+				})
+			)}
 		</div>
 	);
 }

@@ -11,6 +11,7 @@ function SearchPage() {
 	const getSearch = async () => {
 		const response = await instance.get(`?q=${input}`);
 		setRes(response.data);
+		return console.log(res);
 	};
 
 	useEffect(() => {
