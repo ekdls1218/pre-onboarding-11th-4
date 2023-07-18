@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from './components/Header';
 import instance from './apis/axios';
 import RecKeyWord from './components/recKeyWord';
@@ -8,18 +8,27 @@ function SearchPage() {
 	const [res, setRes] = useState([]);
 	//console.log(`?q=${input}`)
 
-	const getSearch = async () => {
-		const response = await instance.get(`?q=${input}`);
-		setRes(response.data);
-		return console.log(res);
+	const debounce = (callBack, delay) => {
+		let timer;
+		return (...args) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => callBack(...args), delay);
+		};
 	};
 
-	useEffect(() => {
-		getSearch();
-	}, [input]);
-	//console.log(input)
+	const printKeyWord = useCallback(
+		debounce((input) => getSearch(input), 500),
+		[],
+	);
+
+	const getSearch = async (input) => {
+		const response = await instance.get(`?q=${input}`);
+		setRes(response.data);
+		console.info('calling api');
+	};
 
 	const inputOnChange = (e) => {
+		printKeyWord(e.target.value);
 		setInput(e.target.value);
 	};
 	return (
