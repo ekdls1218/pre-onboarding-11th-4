@@ -1,6 +1,7 @@
 import React from 'react';
 
 function RecKeyWord({ res }) {
+	console.log(res);
 	return (
 		<div>
 			<p>추천검색어</p>
