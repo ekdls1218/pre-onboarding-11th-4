@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# 4주차 과제
+## 목표
+    검색창 구현 + 검색어 추천 기능 구현 + 캐싱 기능 구현
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 배포 링크
 
-## Available Scripts
+## 실행 방법
+1. 명령어를 사용해서 로컬 환경으로 복사본을 가져옵니다.
+   
+    `git clone https://github.com/ekdls1218/pre-onboarding-11th-4.git`
 
-In the project directory, you can run:
+3. 가져온 복사본으로 이동합니다.
+    
+    `cd pre-onboarding-11th-4`
 
-### `npm start`
+4. 가져온 프로젝트의 종속성을 설치하세요.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    `npm install`
+   
+5. 이 프로젝트는 '.env'를 사용합니다. 다음 단계를 따라 .env를 설정해 주세요.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    -  루트 디렉토리에 '.env'파일을 생성 합니다.
+    -  텍스트 편집기로 '.env' 파일을 엽니다.
+    -  '.env' 파일에 다음 변수와 해당하는 값을 입력하세요.
+       `REACT_APP_API_BASE_URL = "http://localhost:4000/sick"`
 
-### `npm test`
+6. 설치가 완료되었고, .env 설정이 완료 되었다면 다음 명령어로 프로젝트를 실행할 수 있습니다.
+    
+    `npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 기술 스택
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=black"/> <img src="https://img.shields.io/badge/styled components-DB7093?style=flat-square&logo=styled-components&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/> <img src="https://img.shields.io/badge/React Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white"/> <img src="https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white"/> <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black"/> <img src="https://img.shields.io/badge/Husky-red?style=flat-square&logo=&logoColor=black"/> <img src="https://img.shields.io/badge/Netlify-00C7B7?style=flat-square&logo=&logoColor=black"/>
 
-### `npm run build`
+## 목차
+- [파일 구조](#파일-구조)
+- [기능 구현 및 전략](#기능-구현-및-전략)
+   - [입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략](#입력마다-api-호출하지-않도록-api-호출-횟수를-줄이는-전략)
+   - [API 호출별로 로컬 캐싱 구현](#api-호출별로-로컬-캐싱-구현)
+   - [키보드만으로 추천 검색어들로 이동 가능하도록 구현](#키보드만으로-추천-검색어들로-이동-가능하도록-구현)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 파일 구조
+```
+📦src
+ ┣ 📂apis
+ ┃ ┗ 📜axios.js
+ ┣ 📂components
+ ┃ ┣ 📜Header.jsx
+ ┃ ┗ 📜recKeyWord.jsx
+ ┣ 📜GlobalStyle.jsx
+ ┣ 📜index.jsx
+ ┣ 📜router.jsx
+ ┗ 📜SearchPage.jsx
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 기능 구현 및 전략
+#### 입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### API 호출별로 로컬 캐싱 구현
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 키보드만으로 추천 검색어들로 이동 가능하도록 구현
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
