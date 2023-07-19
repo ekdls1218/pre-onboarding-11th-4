@@ -7,11 +7,34 @@ import { styled } from 'styled-components';
 function SearchPage() {
 	const [input, setInput] = useState('');
 	const [res, setRes] = useState([]);
-	console.log(res);
+	const [focusIdx, setFocusIdx] = useState(-1);
+
+	const handleKeyDown = (e) => {
+		const recLength = res.length;
+		const maxList = 7;
+
+		if (e.key === 'ArrowDown') {
+			recLength > 0 && recLength < maxList
+				? setFocusIdx((prev) => (prev + 1) % recLength)
+				: setFocusIdx((prev) => (prev + 1) % maxList);
+		}
+		if (e.key === 'ArrowUp') {
+			recLength > 0 && recLength < maxList
+				? setFocusIdx((prev) => (prev - 1 + recLength) % recLength)
+				: setFocusIdx((prev) => (prev - 1 + maxList) % maxList);
+		}
+		if (e.key === 'Escape') {
+			setFocusIdx(-1);
+		}
+		if (e.key === 'Enter') {
+			recLength > 0 && focusIdx >= 0 && setInput(res[focusIdx]['sickNm']);
+		}
+	};
 
 	const inputOnChange = (e) => {
 		setInput(e.target.value);
 		printKeyWord(e.target.value);
+		setFocusIdx(-1);
 	};
 
 	const debounce = (callBack, delay) => {
@@ -63,11 +86,12 @@ function SearchPage() {
 					placeholder="검색어를 입력하세요."
 					value={input}
 					onChange={inputOnChange}
+					onKeyDown={(e) => handleKeyDown(e)}
 				/>
 				<SearchBtn>검색</SearchBtn>
 			</SearchBar>
 
-			{input !== '' ? <RecKeyWord res={res} /> : null}
+			{input !== '' ? <RecKeyWord res={res} focusIdx={focusIdx} /> : null}
 		</Container>
 	);
 }
@@ -95,7 +119,7 @@ const SearchInput = styled.input`
 	width: 400px;
 	height: 50px;
 	border-radius: 30px 0 0 30px;
-	padding-left: 60px;
+	padding-left: 30px;
 	background-color: #fff;
 `;
 

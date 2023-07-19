@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 
-function RecKeyWord({ res }) {
+function RecKeyWord({ res, focusIdx }) {
 	return (
 		<Ul>
 			<SubTitle>추천검색어</SubTitle>
@@ -10,7 +10,11 @@ function RecKeyWord({ res }) {
 				<Li none>검색어 없음</Li>
 			) : (
 				res.map(function (item, idx) {
-					return <Li key={idx}>{item.sickNm}</Li>;
+					return (
+						<Li key={idx} focus={focusIdx === idx}>
+							{item.sickNm}
+						</Li>
+					);
 				})
 			)}
 		</Ul>
@@ -36,10 +40,9 @@ const SubTitle = styled.div`
 
 const Li = styled.li`
 	list-style: none;
-	padding: 20px 12px 0;
+	padding: 10px 12px 10px;
 	font-size: 17px;
-	color: ${({ focus }) => (focus ? '#357ae1' : 'black')};
-	font-weight: ${({ focus }) => (focus ? 'bold' : 'normal')};
+	background-color: ${({ focus }) => (focus ? '#dee2e6' : 'white')};
 
 	${({ none }) => (none ? 'margin-left : 8px' : '')};
 `;
