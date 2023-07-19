@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Header from './components/Header';
 import instance from './apis/axios';
 import RecKeyWord from './components/recKeyWord';
+import { styled } from 'styled-components';
 
 function SearchPage() {
 	const [input, setInput] = useState('');
@@ -37,12 +38,12 @@ function SearchPage() {
 			try {
 				if (cacheResponse) {
 					//console.log(await cacheResponse.json())
-					const SliceCache = (await cacheResponse.json()).slice(0, 9);
+					const SliceCache = (await cacheResponse.json()).slice(0, 7);
 					setRes(SliceCache);
 				} else {
 					const cloneResponse = new Response(JSON.stringify(response.data));
 					await cacheStorage.put(url, cloneResponse);
-					setRes(response.data.slice(0, 9));
+					setRes(response.data.slice(0, 7));
 					console.log(res);
 					console.info('calling api');
 				}
@@ -53,21 +54,55 @@ function SearchPage() {
 	};
 
 	return (
-		<div>
+		<Container>
 			<Header />
 
-			<div>
-				<input
+			<SearchBar>
+				<SearchInput
 					type="text"
 					placeholder="검색어를 입력하세요."
 					value={input}
 					onChange={inputOnChange}
 				/>
-				<button>검색</button>
+				<SearchBtn>검색</SearchBtn>
+			</SearchBar>
 
-				{input !== '' ? <RecKeyWord res={res} /> : null}
-			</div>
-		</div>
+			{input !== '' ? <RecKeyWord res={res} /> : null}
+		</Container>
 	);
 }
 export default SearchPage;
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #d0e8fd;
+	width: 80%;
+	height: 550px;
+	border-radius: 10px;
+	margin: 20px auto;
+`;
+
+const SearchBar = styled.div`
+	position: relative;
+	display: flex;
+	margin: 20px 0 10px;
+`;
+
+const SearchInput = styled.input`
+	font-size: 18px;
+	width: 400px;
+	height: 50px;
+	border-radius: 30px 0 0 30px;
+	padding-left: 60px;
+	background-color: #fff;
+`;
+
+const SearchBtn = styled.button`
+	color: white;
+	background-color: #357ae1;
+	width: 80px;
+	font-weight: bold;
+	border-radius: 0 30px 30px 0;
+`;
