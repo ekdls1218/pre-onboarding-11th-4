@@ -53,7 +53,6 @@ function SearchPage() {
 	const getSearch = async (input) => {
 		const url = process.env.REACT_APP_API_BASE_URL + `?q=${input}`;
 		if (input !== '') {
-			const response = await instance.get(`?q=${input}`);
 			const cacheStorage = await caches.open('keyword');
 			const cacheResponse = await cacheStorage.match(url);
 			try {
@@ -61,10 +60,11 @@ function SearchPage() {
 					const SliceCache = (await cacheResponse.json()).slice(0, 7);
 					setRes(SliceCache);
 				} else {
+					const response = await instance.get(`?q=${input}`);
+					console.info('calling api');
 					const cloneResponse = new Response(JSON.stringify(response.data));
 					await cacheStorage.put(url, cloneResponse);
 					setRes(response.data.slice(0, 7));
-					console.info('calling api');
 				}
 			} catch (error) {
 				console.error('Error while getting data from cache:', error);
